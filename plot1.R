@@ -30,17 +30,17 @@ ReadBetweenDates <- function(rawstartdate = "2007-02-01",
     
     # Set the start and end date
     startdate <- as.Date(rawstartdate)
-    startdate <- as.POSIXct(startdate) - 60*60*2
+    startdate <- as.POSIXct(startdate) - 60*60*2 # Set the startdate one day back
     enddate <- as.Date(rawenddate)
     enddate <- as.POSIXct(enddate)
     
     print(startdate)
     print(enddate)
     
-    nskip <- which.max(DF.Date.f > startdate)
-    nend <- which.max(DF.Date.f > enddate)
+    nskip <- which.max(DF.Date.f > startdate) - 1  # The number of rows to skip
+    nend <- which.max(DF.Date.f > enddate) - 1     # The last data of the enddate
     
-    nreadrow <- nend - nskip - 1
+    nreadrow <- nend - nskip 
     
     print(nskip)
     print(nend)
