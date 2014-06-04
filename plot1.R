@@ -1,6 +1,6 @@
 # Author : Alicia Wang
 # Date : 4 June 2014
-# 
+# file : plot1.R
 #
 #--------------------------------------------------
 
@@ -57,8 +57,8 @@ ReadBetweenDates <- function(rawstartdate = "2007-02-01",
 }
 
 ##-------------------------------------------------
-#
-#
+# plot1 plots a histogram of Global Active power during the selecting days.
+# 
 ##
 plot1 <- function(rawstartdate = "2007-02-01",
                   rawenddate = "2007-02-02",
@@ -67,6 +67,7 @@ plot1 <- function(rawstartdate = "2007-02-01",
     
     effdata <- ReadBetweenDates(rawstartdate, rawenddate, directory, filename)
     
+    # Get the Global Active Power
     gap <- as.numeric(effdata$Global_active_power)
     
     hist(gap, xlab = "Global Active Power(kilowatts)",

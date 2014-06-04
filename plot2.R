@@ -1,12 +1,12 @@
 # Author : Alicia Wang
 # Date : 4 June 2014
-# 
+# file : plot2.R
 #
 #--------------------------------------------------
 
 ##-------------------------------------------------
-#
-#
+# plot2 plots the fluctuation of Global Active power / time 
+# during the selecting days.
 ##
 plot2 <- function(rawstartdate = "2007-02-01",
                   rawenddate = "2007-02-02",
@@ -15,6 +15,7 @@ plot2 <- function(rawstartdate = "2007-02-01",
     
     effdata <- ReadBetweenDates(rawstartdate, rawenddate, directory, filename)
     
+    # Get the Global Active Power
     gap <- as.numeric(effdata$Global_active_power)
     
     # Extract the date
