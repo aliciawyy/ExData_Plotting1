@@ -46,7 +46,7 @@ ReadBetweenDates <- function(rawstartdate = "2007-02-01",
     print(nend)
     print(nreadrow)
     
-    # Only read between the start and end date of the file
+    # Only read between the start and end dates of the file
     effdata <- read.csv(fullname, col.names = names(DF.row1), colClasses = "character", skip = nskip, 
                         nrow = nreadrow, sep = ";", na.strings = "?")
  
@@ -67,9 +67,14 @@ plot1 <- function(rawstartdate = "2007-02-01",
     
     effdata <- ReadBetweenDates(rawstartdate, rawenddate, directory, filename)
     
+    gap <- as.numeric(effdata$Global_active_power)
     
+    hist(gap, xlab = "Global Active Power(kilowatts)",
+         ylab = "Frequency", main = "Global Active Power", col = "red")
+    par(mar = c(5, 6, 6, 4))
     
-    
-    
+    # Save the data in a .png file
+    dev.copy(png, file = "plot1.png")
+    dev.off()
     
 }
