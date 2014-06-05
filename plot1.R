@@ -4,6 +4,16 @@
 #
 #--------------------------------------------------
 
+##-------------------------------------------------
+# Global variable
+# It is used to cache the data.
+##
+ExtractData <- NULL 
+
+##-------------------------------------------------
+# Clear the cache if you want to change the dates to analyze.
+##
+ClearExtractData <- function() { ExtractData <<- NULL }
 
 ##-------------------------------------------------
 # The function ReadBetweenDates read exactly the data between the dates
@@ -13,6 +23,11 @@ ReadBetweenDates <- function(rawstartdate = "2007-02-01",
                              rawenddate = "2007-02-02",
                              directory = "../ExData",
                              filename = "household_power_consumption.txt") {
+    
+    if ( !is.null(ExtractData) ) {
+        message("Getting cached data.")
+        return(ExtractData)
+    }
     
     # Assemble the full name of the data file with path
     fullname <- paste(directory, "/", filename, sep = "")
@@ -47,13 +62,13 @@ ReadBetweenDates <- function(rawstartdate = "2007-02-01",
     print(nreadrow)
     
     # Only read between the start and end dates of the file
-    effdata <- read.csv(fullname, col.names = names(DF.row1), colClasses = "character", skip = nskip, 
+    ExtractData <<- read.csv(fullname, col.names = names(DF.row1), colClasses = "character", skip = nskip, 
                         nrow = nreadrow, sep = ";", na.strings = "?")
  
-    print(head(effdata))
-    print(tail(effdata))
+    print(head(ExtractData))
+    print(tail(ExtractData))
     
-    effdata
+    ExtractData
 }
 
 ##-------------------------------------------------
@@ -69,6 +84,8 @@ plot1 <- function(rawstartdate = "2007-02-01",
     
     # Get the Global Active Power
     gap <- as.numeric(effdata$Global_active_power)
+    
+    par(mfrow = c(1, 1), cex.lab = 0.8, cex.axis = 0.8)
     
     hist(gap, xlab = "Global Active Power(kilowatts)",
          ylab = "Frequency", main = "Global Active Power", col = "red")

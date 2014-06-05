@@ -22,7 +22,10 @@ plot2 <- function(rawstartdate = "2007-02-01",
     gdate <- paste(effdata$Date, effdata$Time)
     gdate <- strptime(gdate, "%d/%m/%Y %H:%M:%S")
     
-    plot(gdate, gap, ylab = "Global Active Power(kilowatts)", xlab = "", type = "l")
+    par(mfrow = c(1, 1), cex.lab = 0.8, cex.axis = 0.8)
+    
+    plot(gdate, gap, ylab = "Global Active Power(kilowatts)", xlab = "",
+         type = "l")
     par(mar = c(5, 6, 6, 4))
     
     # Save the data in a .png file
