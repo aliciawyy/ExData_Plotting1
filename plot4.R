@@ -20,7 +20,7 @@ plot4 <- function(rawstartdate = "2007-02-01",
     gdate <- strptime(gdate, "%d/%m/%Y %H:%M:%S")
     
     # Set the frame
-    par(mfrow = c(2, 2), mai = c(0.8, 0.35, 0.2, 0), cex.lab = 0.7, cex.axis = 0.8)
+    par(mfrow = c(2, 2), mai = c(0.8, 0.8, 0.2, 0.1), cex.lab = 0.7, cex.axis = 0.8)
     
     # Get the Global Active Power
     gap <- as.numeric(effdata$Global_active_power)
@@ -44,14 +44,14 @@ plot4 <- function(rawstartdate = "2007-02-01",
     lines(gdate, sub3, type="l", col = "blue")
     
     legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
-           col = c("black", "red", "blue"), cex = 0.65, bty = "n",
+           col = c("black", "red", "blue"), cex = 0.7, bty = "n",
            lty = 1)
     
     # Get the Global Reactive Power
     gapre <- as.numeric(effdata$Global_reactive_power)
     
     plot(gdate, gapre, ylab = "Global Reactive Power", xlab = "datetime",
-         type = "h")
+         type = "l")
     
     # Save the data in a .png file
     dev.copy(png, file = "plot4.png")
